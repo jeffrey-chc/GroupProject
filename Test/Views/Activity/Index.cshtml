@@ -1,0 +1,54 @@
+﻿@*@model IEnumerable<Test.Models.Join_Fun_Activities>*@
+@model Test.ViewModels.ActClass
+
+@{
+    //var host = (IEnumerable < Test.Models.Member >)ViewBag.host;
+    ViewBag.Title = "揪團活動列表";
+}
+
+<h2>揪團活動列表</h2>
+
+
+<div class="row">
+    <div class="col-xs-4">
+        @foreach (var item in Model.ClassList)
+        {
+            <p>@Html.ActionLink(item.actClassName, "Index", new { actClassId = item.actClassId })</p>
+        }
+    </div>
+    <div class="col-xs-8">
+        <div class="row">
+            <h3 class="alert alert-success">@ViewBag.actClassName</h3>
+            @if (Session["Account"] != null)
+            {
+                <p>
+                    @Html.ActionLink("新增活動", "Create", new { @class = "btn btn-primary" })
+                </p>
+            }
+        <div class="col-xs-4 thumbnail">
+            @foreach (var item in Model.ActivityList)
+            {
+                var address = item.County.CountyName + item.District.DistrictName + item.actRoad;
+                <p class="text-center">@Html.DisplayFor(modelItem => item.actTopic)</p>
+                <p class="text-center">@Html.DisplayFor(modelItem => item.actTime)</p>
+                <p class="text-center">@Html.DisplayFor(modelItem => item.actDeadline)</p>
+                <p class="text-center">@Html.DisplayFor(modelItem => item.actDescription)</p>
+                <p class="text-center">@Html.DisplayFor(modelItem => item.Age_Restriction.age)</p>
+                <p class="text-center">@Html.DisplayFor(modelItem => item.Gender_Restriction.gender)</p>
+                <p class="text-center">@Html.DisplayFor(modelItem => item.People_Restriction.PeoRestriction)</p>
+                <p class="text-center">@Html.DisplayFor(modelItem => item.Budget_Restriction.Budget)</p>
+                <p class="text-center">@address</p>
+                <p class="text-center">@Html.DisplayFor(modelItem => item.paymentTerm)</p>
+                if (Session["Account"] != null && (Session["memId"]).ToString() == item.hostId)
+                {
+                    <p class="text-center">
+                        @Html.ActionLink("編輯", "Edit", new { id = item.actId }, new { @class = "btn btn-primary" }) |
+                        @Html.ActionLink("刪除", "Delete", new { id = item.actId }, new { @class = "btn btn-danger", onclick = "return confirm('確認刪除嗎??')" })
+                    </p>
+                }
+            }
+
+        </div>
+        </div>
+     </div>
+</div>

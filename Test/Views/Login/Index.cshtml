@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Test.Models.Join_Fun_Activities>
+
+@{
+    ViewBag.Title = "揪團活動列表";
+}
+
+<h2>揪團活動列表</h2>
+
+<p>
+    @Html.ActionLink("新增活動", "Create")
+</p>
+<table class="table table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.hostId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.actTopic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.actTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.actDeadline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.actDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ageRestrict)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.maxNumPeople)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.maxBudget)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.actCounty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.actDistrict)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.actRoad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paymentTerm)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.hostId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.actTopic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.actTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.actDeadline)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.actDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age_Restriction.age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender_Restriction.gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.People_Restriction.PeoRestriction)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Budget_Restriction.Budget)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.County.CountyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.District.DistrictName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.actRoad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paymentTerm)
+        </td>
+        <td>
+            @Html.ActionLink("編輯", "Edit", new { id=item.actId }) |
+            @Html.ActionLink("刪除", "Delete", new { id=item.actId })
+        </td>
+    </tr>
+}
+
+</table>
